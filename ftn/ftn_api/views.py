@@ -12,12 +12,15 @@ class StudentApiView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request, *args, **kwargs):
+
         data = {
             'jmbg': request.data.get('jmbg'), 
             'ime': request.data.get('ime'), 
             'prezime': request.data.get('prezime'), 
+            'image_url': request.data.get('image_url')
         }
         serializer = StudentSerializer(data=data)
+
         if serializer.is_valid():
             # poslati zahtev uns aplikaciji
 
@@ -35,6 +38,7 @@ class ProfesorApiView(APIView):
             'jmbg': request.data.get('jmbg'), 
             'ime': request.data.get('ime'), 
             'prezime': request.data.get('prezime'), 
+            'image_url': request.data.get('image_url')
         }
         serializer = ProfesorSerializer(data=data)
         if serializer.is_valid():
