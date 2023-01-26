@@ -18,7 +18,7 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build the Docker image
-      run: docker build ./uns --file Dockerfile --tag ${{secrets.DOCKER_USER}}/uns:latest
+      run: docker build ./uns/ --file Dockerfile --tag ${{secrets.DOCKER_USER}}/uns:latest
     - name: Docker Push
       run: docker push ${{secrets.DOCKER_USER}}/uns:latest
 
@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build the Docker image
-      run: docker build ./ftn --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn:latest
+      run: docker build ./ftn/ --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn:latest
     - name: Docker Push
       run: docker push ${{secrets.DOCKER_USER}}/ftn:latest
       
@@ -50,6 +50,6 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build the Docker image
-      run: docker build ./ftn-front --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn-front:latest
+      run: docker build ./ftn-front/ --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn-front:latest
     - name: Docker Push
       run: docker push ${{secrets.DOCKER_USER}}/ftn-front:latest
