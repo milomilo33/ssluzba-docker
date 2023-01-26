@@ -23,4 +23,4 @@ WORKDIR /
 
 COPY --from=build /uns /uns
 
-ENTRYPOINT ["/uns"]
+CMD ["/uns"]
