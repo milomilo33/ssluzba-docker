@@ -12,12 +12,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build the Docker image
       run: docker build ./uns --file Dockerfile --tag ${{secrets.DOCKER_USER}}/uns:latest
     - name: Docker Push
@@ -29,12 +28,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build the Docker image
       run: docker build ./ftn --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn:latest
     - name: Docker Push
@@ -46,12 +44,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_TOKEN }}
     - name: Build the Docker image
       run: docker build ./ftn-front --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn-front:latest
     - name: Docker Push
