@@ -11,13 +11,31 @@ services:
       timeout: 5s
       retries: 5
 
-  uns:
+  uns1:
     build: ./uns
     ports:
-      - "8003:8003"
+      - "8004:8003"
     depends_on:
       pg:
         condition: service_healthy
+
+  uns2:
+    build: ./uns
+    ports:
+      - "8005:8003"
+    depends_on:
+      pg:
+        condition: service_healthy
+
+  nginx:
+    image: nginx:1.23.3-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - uns1
+      - uns2
+    ports:
+      - 80:80
 
   ftn:
     build: 
@@ -28,7 +46,7 @@ services:
     volumes:
       - mediafiles:/app/mediafiles
     depends_on:
-      - uns
+      - nginx
 
   ftn-front:
     build: ./ftn-front

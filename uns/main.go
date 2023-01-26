@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+	controllers.RequestCounter = 0
+
 	fmt.Println("Hello, World!")
 
 	// Initialize Database
