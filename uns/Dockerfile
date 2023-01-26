@@ -1,5 +1,6 @@
 ## Build
-FROM golang:1.19-alpine AS build
+# FROM golang:1.19-alpine AS build
+FROM golang:1.19-alpine
 
 ENV GO111MODULE=on
 
@@ -16,11 +17,11 @@ COPY . .
 
 RUN go build -o /uns
 
-## Deploy
-FROM gcr.io/distroless/base-debian10
+# ## Deploy
+# FROM gcr.io/distroless/base-debian10
 
-WORKDIR /
+# WORKDIR /
 
-COPY --from=build /uns /uns
+# COPY --from=build /uns /uns
 
 CMD ["/uns"]
