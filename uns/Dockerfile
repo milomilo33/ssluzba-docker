@@ -1,21 +1,20 @@
-## Build
+# ## Build
 # FROM golang:1.19-alpine AS build
-FROM golang:1.19-alpine
 
-ENV GO111MODULE=on
+# ENV GO111MODULE=on
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+# COPY go.mod .
+# COPY go.sum .
 
-RUN go mod download
+# RUN go mod download
 
-COPY . .
+# COPY . .
 
-# RUN go get
+# # RUN go get
 
-RUN go build -o /uns
+# RUN go build -o /uns
 
 # ## Deploy
 # FROM gcr.io/distroless/base-debian10
@@ -24,4 +23,20 @@ RUN go build -o /uns
 
 # COPY --from=build /uns /uns
 
-CMD ["/uns"]
+# CMD ["/uns"]
+
+FROM golang:1.19-alpine
+
+ENV GO111MODULE=on
+
+WORKDIR /app
+
+COPY . .
+
+RUN go get
+
+RUN go build -o /uns
+
+EXPOSE 8080
+
+CMD [ "/uns" ]
