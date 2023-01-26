@@ -17,10 +17,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Build the Docker image
-      run: docker build ../../uns/ --file Dockerfile --tag ${{secrets.DOCKER_USER}}/uns:latest
-    - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/uns:latest
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: ./uns/
+        push: true
+        tags: ${{ secrets.DOCKER_USER }}/uns:latest
 
   build-ftn:
 
@@ -33,10 +37,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Build the Docker image
-      run: docker build ../../ftn/ --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn:latest
-    - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/ftn:latest
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: ./ftn/
+        push: true
+        tags: ${{ secrets.DOCKER_USER }}/ftn:latest
       
   build-ftn-front:
 
@@ -49,7 +57,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Build the Docker image
-      run: docker build ../../ftn-front/ --file Dockerfile --tag ${{secrets.DOCKER_USER}}/ftn-front:latest
-    - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/ftn-front:latest
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: ./ftn-front/
+        push: true
+        tags: ${{ secrets.DOCKER_USER }}/ftn-front:latest
