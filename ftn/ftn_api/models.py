@@ -5,7 +5,7 @@ def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
 
 class Student(models.Model):
-    jmbg = models.CharField(max_length = 180, unique=True)
+    jmbg = models.CharField(max_length = 180, unique=False)
     ime = models.CharField(max_length = 180)
     prezime = models.CharField(max_length = 180)
     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
@@ -16,7 +16,7 @@ class Student(models.Model):
 
 
 class Profesor(models.Model):
-    jmbg = models.CharField(max_length = 180, unique=True)
+    jmbg = models.CharField(max_length = 180, unique=False)
     ime = models.CharField(max_length = 180)
     prezime = models.CharField(max_length = 180)
     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)

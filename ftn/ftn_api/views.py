@@ -8,6 +8,8 @@ from .models import Student, Profesor
 from .serializers import StudentSerializer, ProfesorSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 
+import requests
+
 class StudentApiView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
@@ -23,6 +25,10 @@ class StudentApiView(APIView):
 
         if serializer.is_valid():
             # poslati zahtev uns aplikaciji
+            r = requests.post('http://localhost:8003/api/uns/student', json={'jmbg': data["jmbg"], 'ime': data["ime"], 'prezime': data["prezime"]})
+            if r.status_code != 201:
+                print("UNS returned error.")
+                return Response(status=status.HTTP_400_BAD_REQUEST)
 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
