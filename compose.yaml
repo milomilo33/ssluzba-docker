@@ -1,0 +1,45 @@
+services:
+  pg:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=uns-db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  uns:
+    build: ./uns
+    ports:
+      - "8003:8003"
+    depends_on:
+      pg:
+        condition: service_healthy
+
+  ftn:
+    build: 
+      context: ./ftn
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - mediafiles:/app/mediafiles
+    depends_on:
+      - uns
+
+  ftn-front:
+    build: ./ftn-front
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ftn
+    stdin_open: true
+    tty: true
+    volumes:
+      - /app/node_modules
+
+volumes:
+  mediafiles:

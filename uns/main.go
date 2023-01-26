@@ -12,7 +12,8 @@ func main() {
 	fmt.Println("Hello, World!")
 
 	// Initialize Database
-	database.Connect("postgresql://localhost/uns-db?user=postgres&password=root")
+
+	database.Connect("postgresql://pg/uns-db?user=postgres&password=root")
 	database.Migrate()
 
 	// Initialize Router

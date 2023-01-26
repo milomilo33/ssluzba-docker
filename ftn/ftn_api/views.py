@@ -25,7 +25,8 @@ class StudentApiView(APIView):
 
         if serializer.is_valid():
             # poslati zahtev uns aplikaciji
-            r = requests.post('http://localhost:8003/api/uns/student', json={'jmbg': data["jmbg"], 'ime': data["ime"], 'prezime': data["prezime"]})
+            print("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEY\n\n\n\n\n")
+            r = requests.post('http://uns:8003/api/uns/student', json={'jmbg': data["jmbg"], 'ime': data["ime"], 'prezime': data["prezime"]})
             if r.status_code != 201:
                 print("UNS returned error.")
                 return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -49,6 +50,10 @@ class ProfesorApiView(APIView):
         serializer = ProfesorSerializer(data=data)
         if serializer.is_valid():
             # poslati zahtev uns aplikaciji
+            r = requests.post('http://uns:8003/api/uns/profesor', json={'jmbg': data["jmbg"], 'ime': data["ime"], 'prezime': data["prezime"]})
+            if r.status_code != 201:
+                print("UNS returned error.")
+                return Response(status=status.HTTP_400_BAD_REQUEST)
 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
