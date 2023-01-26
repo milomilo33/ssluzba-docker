@@ -12,7 +12,8 @@ services:
       retries: 5
 
   uns1:
-    build: ./uns
+    # build: ./uns
+    image: milomilo33/uns:latest
     ports:
       - "8004:8003"
     depends_on:
@@ -20,7 +21,8 @@ services:
         condition: service_healthy
 
   uns2:
-    build: ./uns
+    # build: ./uns
+    image: milomilo33/uns:latest
     ports:
       - "8005:8003"
     depends_on:
@@ -38,9 +40,10 @@ services:
       - 80:80
 
   ftn:
-    build: 
-      context: ./ftn
-      dockerfile: Dockerfile
+    # build: 
+    #   context: ./ftn
+    #   dockerfile: Dockerfile
+    image: milomilo33/ftn:latest
     ports:
       - '8000:8000'
     volumes:
@@ -49,7 +52,8 @@ services:
       - nginx
 
   ftn-front:
-    build: ./ftn-front
+    # build: ./ftn-front
+    image: milomilo33/ftn-front:latest
     ports:
       - "8080:8080"
     depends_on:
