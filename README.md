@@ -1,5 +1,5 @@
 ﻿# ssluzba-docker
-University Docker-based project.
+University Docker and GitHub Actions-based project.
 
 Technologies used: Docker, Python (Django), Go (Gin), Vue.js, nginx
  
